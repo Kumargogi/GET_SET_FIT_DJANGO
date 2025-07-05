@@ -26,10 +26,15 @@ def login_view(request):
             # Check if this user exists in the database
             try:
                 user = CustomUser.objects.get(name=name, password=password)
-                return redirect('landing')  # Logged in!
+                # return redirect('landing')  # Logged in!
+                return redirect('home')
             except CustomUser.DoesNotExist:
                 form.add_error(None, "Invalid credentials")
 
     else:
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
+
+def home_view(request):
+    return render(request, 'users/home.html')
+
